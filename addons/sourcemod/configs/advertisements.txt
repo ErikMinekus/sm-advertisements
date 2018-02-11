@@ -15,6 +15,10 @@
 // When omitted everyone will see the advertisement.
 // When left empty only admins will see the advertisement.
 
+// Rikka0w0`s note: 
+// 1. Valid color value in L4D2: {default}, {yellow}, {green}, {lightgreen}
+// 2. "top" mode is not available in L4D2
+
 "Advertisements"
 {
     "1"

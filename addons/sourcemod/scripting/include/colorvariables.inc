@@ -27,6 +27,9 @@ enum triple {
 	yes = true,
 	no = false
 }
+
+// Rikka0w0`s patch
+static triple:g_IsLeft4Dead = unknown;
 static triple:g_IsSource2009 = unknown;
 // ----------------------------------------------------------------------------------------
 
@@ -496,6 +499,10 @@ stock CSayText2(iClient, String:sMessage[], iAuthor)
 
 stock CAddWhiteSpace(String:sBuffer[], iSize)
 {
+	// Rikka0w0`s patch
+	if (IsLeft4Dead())
+		return;
+
 	if (!IsSource2009()) {
 		Format(sBuffer, iSize, " %s", sBuffer);
 	}
@@ -962,6 +969,14 @@ stock static AddColors(Handle:hTrie)
 		SetTrieString(hTrie, "whitesmoke", "\x07F5F5F5");
 		SetTrieString(hTrie, "yellow", "\x07FFFF00");
 		SetTrieString(hTrie, "yellowgreen", "\x079ACD32");
+
+	// Rikka0w0`s patch		
+	} else if (IsLeft4Dead()) {
+		SetTrieString(hTrie, "default", "\x01");
+		SetTrieString(hTrie, "lightgreen", "\x03");
+		SetTrieString(hTrie, "yellow", "\x04");
+		SetTrieString(hTrie, "green", "\x05");
+		
 	} else {
 		SetTrieString(hTrie, "default", "\x01");
 		SetTrieString(hTrie, "teamcolor", "\x03");
@@ -1009,6 +1024,16 @@ stock static bool:IsSource2009()
 	}
 
 	return bool:g_IsSource2009;
+}
+
+// Rikka0w0`s patch		
+stock static bool:IsLeft4Dead(){
+	if (g_IsLeft4Dead == unknown) {
+		new EngineVersion:iEngineVersion = GetEngineVersion();
+		g_IsLeft4Dead = (iEngineVersion == Engine_Left4Dead2 || iEngineVersion == Engine_Left4Dead) ? yes : no;
+	}
+
+	return bool:g_IsLeft4Dead;
 }
 
 stock static AddPrefixAndDefaultColor(String:sMessage[], iSize, String:sDefaultColor[] = "default", String:sPrefixColor[] = "prefix")
