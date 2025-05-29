@@ -1,0 +1,14 @@
+"Updater"
+{
+    "Information"
+    {
+        "Version"
+        {
+            "Latest"	"2.1.2"
+        }
+    }
+    "Files"
+    {
+        "Plugin"	"Path_Mod/addons/sourcemod/plugins/advertisements.smx"
+    }
+}
