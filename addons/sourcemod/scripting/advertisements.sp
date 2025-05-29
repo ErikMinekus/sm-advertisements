@@ -9,7 +9,7 @@
 #include "advertisements/chatcolors.sp"
 #include "advertisements/topcolors.sp"
 
-#define PL_VERSION	"2.1.1"
+#define PL_VERSION	"2.1.2"
 #define UPDATE_URL	"http://ErikMinekus.github.io/sm-advertisements/update.txt"
 
 public Plugin myinfo =
@@ -128,13 +128,13 @@ public Action Command_ReloadAds(int args)
 /**
  * Menu Handlers
  */
-public int MenuHandler_DoNothing(Menu menu, MenuAction action, int param1, int param2) {}
+public void MenuHandler_DoNothing(Menu menu, MenuAction action, int param1, int param2) {}
 
 
 /**
  * Timers
  */
-public Action Timer_DisplayAd(Handle timer)
+public void Timer_DisplayAd(Handle timer)
 {
     if (!g_hEnabled.BoolValue) {
         return;

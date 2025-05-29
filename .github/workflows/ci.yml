@@ -9,11 +9,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        sourcemod-version: ['1.10', '1.11']
+        sourcemod-version: ['1.12', '1.13']
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up SourcePawn compiler
         run: >
@@ -25,7 +25,7 @@ jobs:
         run: $GITHUB_WORKSPACE/spcomp advertisements.sp -i include -o ../plugins/advertisements.smx
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: sourcemod-${{ matrix.sourcemod-version }}
           path: addons/sourcemod
@@ -38,11 +38,14 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        sourcemod-version: ['1.10']
+        sourcemod-version: ['1.12']
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Download artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: sourcemod-${{ matrix.sourcemod-version }}
           path: addons/sourcemod
@@ -53,9 +56,7 @@ jobs:
       - name: Release
         uses: svenstaro/upload-release-action@v2
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: advertisements.zip
-          tag: ${{ github.ref }}
 
       - name: Deploy to GitHub Pages
         run: |
